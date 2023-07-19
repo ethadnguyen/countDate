@@ -1,10 +1,15 @@
 const yourDate = new Date("2023-05-02T20:20:20"),
       music = ['3000', 'anodt', 'tothichcau'];
 
+const audioElement = document.querySelector("audio");
+const rotatingImages = document.querySelectorAll(".rotate");
+
+
 document.addEventListener('DOMContentLoaded', function () {
       var rootTime = document.querySelector("time");
 
       document.querySelector("anni").textContent = `${(yourDate.getDate() > 9) ? yourDate.getDate() : "0" + yourDate.getDate()}-${(yourDate.getMonth() > 8) ? (yourDate.getMonth() + 1) : "0" + (yourDate.getMonth() + 1)}-${yourDate.getFullYear()}`;
+
       document.querySelector("date").textContent = Math.floor(Math.floor((new Date() - yourDate) / 1000) / 60 / 60 / 24) + " DAYS";
 
       function olock() {
@@ -22,19 +27,24 @@ document.addEventListener('DOMContentLoaded', function () {
             "<div id='mask'></div>"
       );
 
-}, false);
-
-const audioElement = document.querySelector("audio");
-const rotatingImages = document.querySelectorAll(".rotate");
-
-audioElement.addEventListener("play", () => {
-      rotatingImages.forEach((image) => {
-            image.style.animationPlayState = "running";
-      });
-});
-
-audioElement.addEventListener("pause", () => {
+      audioElement.play();
       rotatingImages.forEach((image) => {
             image.style.animationPlayState = "paused";
       });
-});
+      audioElement.addEventListener("play", () => {
+            rotatingImages.forEach((image) => {
+                  image.style.animationPlayState = "running";
+            });
+      });
+
+      audioElement.addEventListener("pause", () => {
+            rotatingImages.forEach((image) => {
+                  image.style.animationPlayState = "paused";
+            });
+      });
+
+
+}, false);
+
+
+
